@@ -73,3 +73,19 @@ import * as actions from './actions'
 
 const {dec, inc, rnd} = bindActionCreators(actions, dispatch)
 ```
+connect() - HOC is used to make Component get state and dispatch-functions from context
+```javascript
+import {connect} from 'react-redux'
+
+const mapStateToProps = (state) => ({counter: state})
+
+const mapDispatchToProps = (dispatch) => ({inc: () => dispatch({type: 'INC'})})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
+```
+Transferring all functionality from Counter to Actions allows you to replace mapDispatchToProps with actions:
+```javascript
+const mapStateToProps = (state) => ({counter: state})
+
+export default connect(mapStateToProps, actions)(Counter)
+```
